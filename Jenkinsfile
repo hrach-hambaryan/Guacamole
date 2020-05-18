@@ -44,7 +44,7 @@ pipeline {
                             credentialsId: 'Nexus',
                             artifacts: [
                                 [artifactId: 'guacamole-1.2.0',
-                                file: 'guacamole-1.2.0.war',
+                                file: 'target/guacamole-1.2.0.war',
                                 type: 'war']
                             ]
                     )
