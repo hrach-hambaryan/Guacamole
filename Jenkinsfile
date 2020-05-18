@@ -18,7 +18,6 @@ pipeline {
         stage("clone code") {
             steps {
                 script {
-                    // Let's clone the source
                     git 'https://github.com/hrach-hambaryan/Guacamole.git'
                 }
             }
@@ -45,7 +44,7 @@ pipeline {
                             credentialsId: 'Nexus',
                             artifacts: [
                                 [artifactId: 'guacamole-1.2.0',
-                                file: 'guacamole-1.2.0.war',
+                                file: pom.module + version + '.war',
                                 type: 'war']
                             ]
                     )
