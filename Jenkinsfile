@@ -38,8 +38,21 @@ pipeline {
                     // Find build artifact under target folder
                     filesByGlob = findFiles(glob: "target/*.war");
                     // Print some info from the artifact found
-                    echo "${filesByGlob[0]}"
+                    echo "${filesByGlob}"
                 }
+                nexusArtifactUploader (
+                    nexusVersion: NEXUS_VERSION,
+                    protocol: NEXUS_PROTOCOL,
+                    nexusUrl: NEXUS_URL,
+                    groupId: test,
+                    version: '${BUILD_NUMBER}',
+                    repository: NEXUS_REPOSITORY,
+                    credentialsId: NEXUS_CREDENTIAL_ID,
+                    artifacts: [artifactId: pom.artifactId,
+                    classifier: '',
+                    file: filesByGlob,
+                    type: war]
+                )
             }
         } 
     }
