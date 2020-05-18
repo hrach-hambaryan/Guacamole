@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     def pom = readMavenPom file: 'pom.xml'
-                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
+                    def filesByGlob = findFiles(glob: "target/*.war")
                     echo filesByGlob
                     nexusArtifactUploader(
                             nexusVersion: NEXUS_VERSION,
