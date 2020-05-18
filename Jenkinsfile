@@ -1,8 +1,10 @@
-    stage('SCM checkout'){
+node{
+    stage('SCM Checkout'){
         git 'https://github.com/hrach-hambaryan/Guacamole'
-    }	    
-    stage('Compile package'){
-    def mvnHome = tool name: 'maven', type: 'maven'
-    sh "${mvnHome}"/bin/mvn package"
-    }	    
-}	
+    }
+    stage('Compile-Package'){
+        // Get maven home path
+        def mvnHome = tool name: 'maven-3', type: 'maven'
+        sh "${mvnHome}/bin/mvn package"
+    }
+}
