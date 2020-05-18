@@ -1,6 +1,6 @@
 node{
      stage('SCM Checkout'){
-     git clone 'https://github.com/hrach-hambaryan/Guacamole.git'
+     git 'https://github.com/hrach-hambaryan/Guacamole.git'
     }
     stage('Compile-Package'){
         // Get maven home path
