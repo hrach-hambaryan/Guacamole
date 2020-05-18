@@ -36,7 +36,7 @@ pipeline {
                 script {
                     pom = readMavenPom file: "pom.xml";
                     // Find build artifact under target folder
-                    filesByGlob = findFiles(glob: "**/*.war");
+                    filesByGlob = findFiles(glob: "guacamole/target/*.${pom.packaging}");
                     // Print some info from the artifact found
                     echo "${filesByGlob}"
                 }
