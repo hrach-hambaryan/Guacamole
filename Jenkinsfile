@@ -44,7 +44,7 @@ pipeline {
                             credentialsId: 'Nexus',
                             artifacts: [
                                 [artifactId: 'Guacamole',
-                                file: '/var/jenkins_home/workspace/Guacamole/guacamole/target/guacamole-1.2.0.war',
+                                file: '/var/jenkins_home/workspace/Guacamole/guacamole/target/*.war',
                                 type: 'war']
                             ]
                     )
