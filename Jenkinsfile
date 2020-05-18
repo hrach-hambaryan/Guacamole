@@ -34,7 +34,7 @@ pipeline {
          stage("publish to nexus") {
             steps {
                 script {
-                    pom = readMavenPom file: "pom.xml" 
+                    pom = readMavenPom file: "pom.xml";
                     // Find build artifact under target folder
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     // Print some info from the artifact found
