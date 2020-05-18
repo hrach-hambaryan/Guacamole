@@ -38,15 +38,9 @@ pipeline {
                     // Find build artifact under target folder
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     // Print some info from the artifact found
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    echo "${filesByGlob}"
                     // Extract the path from the file found
                     artifactPath = filesByGlob[0].path;
-                    // Assign to  a boolean response verifying if the artifact file name exists
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}"
-                    }
-
                 }
             }
         } 
