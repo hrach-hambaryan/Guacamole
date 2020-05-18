@@ -35,6 +35,7 @@ pipeline {
                 script {
                     def pom = readMavenPom file: 'pom.xml'
                     def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
+                    echo filesByGlob
                     nexusArtifactUploader(
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
