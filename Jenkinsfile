@@ -34,6 +34,7 @@ pipeline {
             steps {
                 script {
                     def pom = readMavenPom file: 'pom.xml'
+                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
                     nexusArtifactUploader(
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
@@ -44,7 +45,7 @@ pipeline {
                             credentialsId: 'Nexus',
                             artifacts: [
                                 [artifactId: 'Guacamole',
-                                file: '/var/jenkins_home/workspace/Guacamole/guacamole/target/guacamole-1.2.0.war',
+                                file: filesByGlob,
                                 type: 'war']
                             ]
                     )
