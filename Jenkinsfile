@@ -40,7 +40,7 @@ pipeline {
                     // Print some info from the artifact found
                     echo "${filesByGlob}"
                 }
-                nexusArtifactUploader (
+             nexusArtifactUploader (
                     nexusVersion: NEXUS_VERSION,
                     protocol: NEXUS_PROTOCOL,
                     nexusUrl: NEXUS_URL,
