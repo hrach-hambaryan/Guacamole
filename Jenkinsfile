@@ -38,13 +38,13 @@ pipeline {
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
-                            groupId: "${pom.name}",
+                            groupId: 'Gruacamole',
                             version: "${pom.version}",
-                            repository: 'Guacamole',
+                            repository: 'nexus-guacamole',
                             credentialsId: 'Nexus',
                             artifacts: [
-                                [artifactId: 'guacamole-1.2.0',
-                                file: 'target/guacamole-1.2.0.war',
+                                [artifactId: 'Guacamole',
+                                file: '/var/jenkins_home/workspace/Guacamole/guacamole/target/guacamole-1.2.0.war',
                                 type: 'war']
                             ]
                     )
