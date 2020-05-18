@@ -36,7 +36,6 @@ pipeline {
             script {
                 def pom = readMavenPom file: 'pom.xml'
                 echo pom.version
-
                 nexusArtifactUploader(
                         nexusVersion: NEXUS_VERSION,
                         protocol: NEXUS_PROTOCOL,
@@ -46,8 +45,8 @@ pipeline {
                         repository: 'Guacamole',
                         credentialsId: 'Nexus',
                         artifacts: [
-                            [artifactId: 'com.example',
-                            file: pom.module + pom.version + '.war',
+                            [artifactId: 'guacamole-1.2.0',
+                            file: 'guacamole-1.2.0.war',
                             type: 'war']
                         ]
                 )
