@@ -47,7 +47,7 @@ pipeline {
                         credentialsId: 'Nexus',
                         artifacts: [
                             [artifactId: 'com.example',
-                            file: 'com.example-' + pom.version + '.war',
+                            file: pom.name + pom.version + '.war',
                             type: 'war']
                         ]
                 )
