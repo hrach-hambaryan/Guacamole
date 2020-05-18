@@ -41,13 +41,13 @@ pipeline {
                         nexusVersion: NEXUS_VERSION,
                         protocol: NEXUS_PROTOCOL,
                         nexusUrl: NEXUS_URL,
-                        groupId: "${pom.name}",
+                        groupId: "${pom.module}",
                         version: "${pom.version}",
                         repository: 'Guacamole',
                         credentialsId: 'Nexus',
                         artifacts: [
                             [artifactId: 'com.example',
-                            file: pom.name + pom.version + '.war',
+                            file: pom.module + pom.version + '.war',
                             type: 'war']
                         ]
                 )
