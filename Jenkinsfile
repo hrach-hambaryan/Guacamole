@@ -31,29 +31,28 @@ pipeline {
                 }
             }
         }
-         stage("publish to nexus") {
-            steps {
-                script {
-                    pom = readMavenPom file: "pom.xml";
-                    // Find build artifact under target folder
-                    filesByGlob = findFiles(glob: "target/*.war");
-                    // Print some info from the artifact found
-                    echo "${filesByGlob}"
-                }
-             nexusArtifactUploader (
-                    nexusVersion: NEXUS_VERSION,
-                    protocol: NEXUS_PROTOCOL,
-                    nexusUrl: NEXUS_URL,
-                    groupId: test,
-                    version: '${BUILD_NUMBER}',
-                    repository: NEXUS_REPOSITORY,
-                    credentialsId: NEXUS_CREDENTIAL_ID,
-                    artifacts: [artifactId: pom.artifactId,
-                    classifier: '',
-                    file: filesByGlob,
-                    type: war]
+        stage('Nexus') {
+        steps {
+            script {
+                def pom = readMavenPom file: 'pom.xml'
+                echo pom.version
+
+                nexusArtifactUploader(
+                        nexusVersion: NEXUS_VERSION,
+                        protocol: NEXUS_PROTOCOL,
+                        nexusUrl: NEXUS_URL,
+                        groupId: 'com.example',
+                        **version: "${pom.version}",**
+                        repository: 'Guacamole',
+                        credentialsId: 'Nexus',
+                        artifacts: [
+                            [artifactId: 'com.example',
+                            file: 'com.example-' + pom.version + '.war',
+                            type: 'war']
+                        ]
                 )
             }
-        } 
+        }
+    }
     }
 }
