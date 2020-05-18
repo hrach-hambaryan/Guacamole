@@ -42,7 +42,7 @@ pipeline {
                         protocol: NEXUS_PROTOCOL,
                         nexusUrl: NEXUS_URL,
                         groupId: 'com.example',
-                        **version: "${pom.version}",**
+                        version: "${pom.version}",
                         repository: 'Guacamole',
                         credentialsId: 'Nexus',
                         artifacts: [
