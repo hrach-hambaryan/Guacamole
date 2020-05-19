@@ -46,7 +46,7 @@ pipeline {
                         credentialsId: 'Nexus',
                         artifacts: [
                             [artifactId: 'com.example',
-                            file: 'Guacamole' + pom.version + '.war',
+                            file: 'Guacamole-' + pom.version + '.war',
                             type: 'war']
                         ]
                 )
