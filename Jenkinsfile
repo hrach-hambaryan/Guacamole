@@ -15,13 +15,28 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "Nexus"
     }
     stages {
+        stage("clone code") {
+            steps {
+                script {
+                    git 'https://github.com/hrach-hambaryan/Guacamole.git'
+                }
+            }
+        }
+        stage("mvn build") {
+            steps {
+                script {
+                    def mvnHome = tool name: 'maven', type: 'maven'
+                    sh "${mvnHome}/bin/mvn -Drat.ignoreErrors=true package"
+                }
+            }
+        }        
         stage('Nexus') {
             steps {
                 script {
                     // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
-                    pom = readMavenPom file: 'pom.xml'
+                    def pom = readMavenPom file: 'pom.xml'
                     // Find built artifact under target folder
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
                     echo "${filesByGlob.name}"
                     nexusArtifactUploader(
                             nexusVersion: NEXUS_VERSION,
