@@ -15,21 +15,6 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "Nexus"
     }
     stages {
-        stage("clone code") {
-            steps {
-                script {
-                    git 'https://github.com/hrach-hambaryan/Guacamole.git'
-                }
-            }
-        }
-        stage("mvn build") {
-            steps {
-                script {
-                    def mvnHome = tool name: 'maven', type: 'maven'
-                    sh "${mvnHome}/bin/mvn -Drat.ignoreErrors=true package"
-                }
-            }
-        }
         stage('Nexus') {
             steps {
                 script {
@@ -37,7 +22,7 @@ pipeline {
                     pom = readMavenPom file: 'pom.xml'
                     // Find built artifact under target folder
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    echo "${filesByGlob.name}"
                     nexusArtifactUploader(
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
