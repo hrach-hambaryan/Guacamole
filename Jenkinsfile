@@ -33,18 +33,22 @@ pipeline {
         stage('Nexus') {
             steps {
                 script {
-                    def pom = readMavenPom file: 'pom.xml'
+                    // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
+                    pom = readMavenPom file: 'pom.xml'
+                    // Find built artifact under target folder
+                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     nexusArtifactUploader(
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
-                            groupId: "${pom.name}",
+                            groupId: 'Gruacamole',
                             version: "${pom.version}",
                             repository: 'nexus-guacamole',
                             credentialsId: 'Nexus',
                             artifacts: [
                                 [artifactId: 'Guacamole',
-                                file: '/var/jenkins_home/workspace/Guacamole/guacamole/target/Guacamole-1.2.0.war',
+                                file: '/var/jenkins_home/workspace/Guacamole/guacamole/target/guacamole-1.2.0.war',
                                 type: 'war']
                             ]
                     )
