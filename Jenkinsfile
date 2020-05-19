@@ -33,25 +33,25 @@ pipeline {
         }
         stage('Nexus') {
         steps {
-            script {
-                def pom = readMavenPom file: 'pom.xml'
-                echo pom.version
-                nexusArtifactUploader(
-                        nexusVersion: NEXUS_VERSION,
-                        protocol: NEXUS_PROTOCOL,
-                        nexusUrl: NEXUS_URL,
-                        groupId: "${pom.name}",
-                        version: "${pom.version}",
-                        repository: 'nexus-guacamole',
-                        credentialsId: 'Nexus',
-                        artifacts: [
-                            [artifactId: 'Guacamole',
-                            file: '/var/jenkins_home/workspace/Guacamole-pipeline/guacamole/target/guacamole-' + pom.version + '.war',
-                            type: 'war']
-                        ]
-                )
+                script {
+                    def pom = readMavenPom file: 'pom.xml'
+                    echo pom.version
+                    nexusArtifactUploader(
+                            nexusVersion: NEXUS_VERSION,
+                            protocol: NEXUS_PROTOCOL,
+                            nexusUrl: NEXUS_URL,
+                            groupId: "${pom.name}",
+                            version: "${pom.version}",
+                           repository: 'nexus-guacamole',
+                            credentialsId: 'Nexus',
+                            artifacts: [
+                                [artifactId: 'Guacamole',
+                                file: '/var/jenkins_home/workspace/Guacamole-pipeline/guacamole/target/guacamole-' + pom.version + pom.packaging,
+                                type: 'war']
+                            ]
+                    )
+                }
             }
-        }
-    }
+       }
     }
 }
