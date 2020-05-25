@@ -41,7 +41,7 @@ pipeline {
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
                             groupId: "${pom.name}",
-                            version: "${BUILD_NUMBER}",
+                            version: "1.${BUILD_NUMBER}",
                            repository: 'nexus-guacamole',
                             credentialsId: 'Nexus',
                             artifacts: [
