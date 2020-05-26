@@ -8,7 +8,7 @@ pipeline {
         //This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your nexus is running
-        NEXUS_URL = "10.0.10.8:8081"
+        NEXUS_URL = "10.0.10.155:8081"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "Guacamole"
         // Jenkins credential id to authenticate to Nexus OSS
