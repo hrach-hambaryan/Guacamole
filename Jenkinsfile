@@ -40,7 +40,7 @@ pipeline {
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
-                            groupId: "${pom.name}",
+                            groupId: "org.apache.guacamole",
                             version: "1.${BUILD_NUMBER}",
                            repository: 'nexus-guacamole',
                             credentialsId: 'Nexus',
